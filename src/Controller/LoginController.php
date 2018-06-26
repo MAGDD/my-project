@@ -34,7 +34,7 @@ class LoginController extends  AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
         if (true === $authChecker->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('admin/dashboard');
         }
         if (true === $authChecker->isGranted('ROLE_PARENT')) {
             return $this->redirectToRoute('parents');
