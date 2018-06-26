@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\Entity\Users" table="users">
+    <indexes>
+      <index name="eleve_classe" columns="idClasse"/>
+      <index name="admin_ecole" columns="idEcole"/>
+      <index name="parent" columns="parent"/>
+    </indexes>
+    <id name="identifiant" type="integer" column="identifiant">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="prenom" type="string" column="prenom" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nom" type="string" column="nom" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="password" type="string" column="password" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="email" type="string" column="email" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="telephone" type="string" column="telephone" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="status" type="integer" column="status" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="role" type="string" column="role" length="25" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="photo" type="string" column="photo" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="idecole" target-entity="Ecole" fetch="LAZY">
+      <join-columns>
+        <join-column name="idEcole" referenced-column-name="idEcole"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idclasse" target-entity="Classe" fetch="LAZY">
+      <join-columns>
+        <join-column name="idClasse" referenced-column-name="idClasse"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="parent" target-entity="Users" fetch="LAZY">
+      <join-columns>
+        <join-column name="parent" referenced-column-name="identifiant"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="idevaluation" target-entity="Evaluation" inversed-by="ideleve" fetch="LAZY">
+      <join-table name="note">
+        <join-columns>
+          <join-column name="idEleve" referenced-column-name="identifiant"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="idEvaluation" referenced-column-name="idEvaluation"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

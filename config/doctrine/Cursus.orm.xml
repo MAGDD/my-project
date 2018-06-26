@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\Entity\Cursus" table="cursus">
+    <indexes>
+      <index name="idCursus" columns="idCursus"/>
+    </indexes>
+    <id name="idcursus" type="integer" column="idCursus">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nomcursus" type="string" column="nomCursus" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-many field="idecole" target-entity="Ecole" inversed-by="idcursus" fetch="LAZY">
+      <join-table name="cursus_ecole">
+        <join-columns>
+          <join-column name="idCursus" referenced-column-name="idCursus"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="idEcole" referenced-column-name="idEcole"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

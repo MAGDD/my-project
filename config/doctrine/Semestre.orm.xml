@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\Entity\Semestre" table="semestre">
+    <id name="idsemestre" type="integer" column="IdSemestre">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nomsemestre" type="string" column="nomSemestre" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-many field="idecole" target-entity="Ecole" mapped-by="idsemestre" fetch="LAZY"/>
+    <many-to-many field="idclasse" target-entity="Classe" mapped-by="idsemestre" fetch="LAZY"/>
+  </entity>
+</doctrine-mapping>

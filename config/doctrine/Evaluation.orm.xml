@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\Entity\Evaluation" table="evaluation">
+    <indexes>
+      <index name="evaluation_matiere" columns="idMatiere"/>
+      <index name="evaluation_semestre" columns="idSemestre"/>
+    </indexes>
+    <id name="idevaluation" type="integer" column="idEvaluation">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nomevaluation" type="string" column="nomEvaluation" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="dateevaluation" type="date" column="dateEvaluation" nullable="false"/>
+    <field name="heureevaluation" type="string" column="heureEvaluation" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="idmatiere" target-entity="Matiere" fetch="LAZY">
+      <join-columns>
+        <join-column name="idMatiere" referenced-column-name="idMatiere"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idsemestre" target-entity="Semestre" fetch="LAZY">
+      <join-columns>
+        <join-column name="idSemestre" referenced-column-name="IdSemestre"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="idclasse" target-entity="Classe" mapped-by="idevaluation" fetch="LAZY"/>
+    <many-to-many field="ideleve" target-entity="Users" mapped-by="idevaluation" fetch="LAZY"/>
+  </entity>
+</doctrine-mapping>

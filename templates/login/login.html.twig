@@ -1,0 +1,48 @@
+{# app/Resources/views/security/login.html.twig #}
+{# ... you will probably extend your base template, like base.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container" style="margin-top: 150px;">
+        <div class="row">
+            <div class="col-lg-3">
+
+            </div>
+            <div class="col-lg-6" style="background: white">
+                <div class="panel panel-success" >
+                    <div class="panel-heading">
+                        <h3>Connection</h3>
+                    </div>
+                    <div class="panel-body" >
+
+
+                        <form action="{{ path('login') }}" method="post">
+                            <div class="form-group">
+                                <label for="username" class="sr-only">UserName:</label>
+                                <input type="text" id="username" class="form-control" placeholder="Nom d-utilisateur" name="_username"   required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword" class="sr-only">Password:</label>
+                                <input type="password" id="password" class="form-control" name="_password"  placeholder="Password"  required>
+                            </div>
+                            <input type="hidden" name="admin.html.twig" value="/admin" />
+
+                            <button class="btn btn-info pull-right"  style="display: block;margin: auto" type="submit">Connectez</button>
+
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}

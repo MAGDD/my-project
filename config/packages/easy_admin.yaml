@@ -1,0 +1,20 @@
+easy_admin:
+    entities:
+        # List the entity class name you want to manage
+        - App\Entity\Users
+        - App\Entity\Ecole
+        - App\Entity\Classe
+    site_name: 'GesSchool'
+    design:
+            templates:
+                  layout: 'templates/layout.html.twig'
+            brand_color: '#1ABC9C'
+            color_scheme: 'light'
+            assets:
+               css:
+                   # relative internal bundle URL
+                    - 'bundles/app/css/admin5.css'
+               js:
+                    - 'bundles/app/js/admin5.js'
+framework:
+    translator: { fallbacks: [ "fr" ] }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\Entity\Ecole" table="ecole">
+    <id name="idecole" type="integer" column="idEcole">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nomecole" type="string" column="nomEcole" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="statut" type="string" column="statut" length="20" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-many field="idcursus" target-entity="Cursus" mapped-by="idecole" fetch="LAZY"/>
+    <many-to-many field="idsemestre" target-entity="Semestre" inversed-by="idecole" fetch="LAZY">
+      <join-table name="ecole_semestre">
+        <join-columns>
+          <join-column name="idEcole" referenced-column-name="idEcole"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="idSemestre" referenced-column-name="IdSemestre"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

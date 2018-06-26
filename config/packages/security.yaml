@@ -1,0 +1,53 @@
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+
+    providers:
+        in_memory:
+                    memory:
+                        users:
+                            kabu:
+                                password: kabu
+                                roles: 'ROLE_ADMIN'
+                            admin:
+                                password:  admin
+                                roles: 'ROLE_ADMIN'
+                            lamine:
+                               password: lamine
+                               roles: 'ROLE_PARENT'
+                            sokhna_awa:
+                              password: awa
+                              roles: 'ROLE_ELEVE'
+                            soda:
+                              password: soda
+                              roles: 'ROLE_PROF'
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+            form_login:
+                 login_path: login
+                 check_path: login
+                 default_target_path: /login
+
+            logout:
+                path: /login
+                target: /
+
+            # activate different ways to authenticate
+
+            # http_basic: true
+            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: true
+            # https://symfony.com/doc/current/security/form_login_setup.html
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+         - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }
